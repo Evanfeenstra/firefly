@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge } = require('electron')
+import { ipcRenderer, contextBridge } from 'electron'
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
@@ -58,23 +58,22 @@ try {
                 }
             })
         },
-        listProfileFolders(profileStoragePath, profiles) {
-            return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
-                // Check that the profile path matches the user data path
-                // so that we don't try and remove things outside our scope
-                if (profileStoragePath.startsWith(userDataPath)) {
-                    try {
-                        // Get a list of all the profile folders in storage
-                        return fs.readdirSync(profileStoragePath)
-                    } catch (err) {
-                        if (err.code === 'ENOENT') {
-                            // The __storage__ directory doesn't exist
-                            return []
-                        }
-                        console.error(err)
+        async listProfileFolders(profileStoragePath) {
+            const userDataPath = await ipcRenderer.invoke('get-path', 'userData')
+            // Check that the profile path matches the user data path
+            // so that we don't try and remove things outside our scope
+            if (profileStoragePath.startsWith(userDataPath)) {
+                try {
+                    // Get a list of all the profile folders in storage
+                    return fs.readdirSync(profileStoragePath)
+                } catch (err) {
+                    if (err.code === 'ENOENT') {
+                        // The __storage__ directory doesn't exist
+                        return []
                     }
+                    console.error(err)
                 }
-            })
+            }
         },
         PincodeManager,
         DeepLinkManager,
