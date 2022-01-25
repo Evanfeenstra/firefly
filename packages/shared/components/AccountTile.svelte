@@ -28,8 +28,6 @@
     import { wallet } from 'shared/lib/wallet'
     import { get } from 'svelte/store'
 
-    const NEW_LINE = '\r\n'
-
     export let name = ''
     export let balance = ''
     export let balanceEquiv = ''
