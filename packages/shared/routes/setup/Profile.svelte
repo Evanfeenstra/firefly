@@ -1,8 +1,8 @@
 <script lang="typescript">
+    import { createEventDispatcher } from 'svelte'
     import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { cleanupSignup } from 'shared/lib/app'
     import { Electron } from 'shared/lib/electron'
-    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
@@ -15,98 +15,99 @@
         profiles,
     } from 'shared/lib/profile'
     import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
-    import { createEventDispatcher } from 'svelte'
-    import { get } from 'svelte/store'
-    import type { Locale } from 'shared/lib/typings/i18n'
     import { openPopup } from 'shared/lib/popup';
+    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers';
+    import type { Locale } from 'shared/lib/typings/i18n'
+    import type { Profile } from 'shared/lib/typings/profile';
 
     export let locale: Locale
+    export let mobile: boolean
 
-    export let mobile
     let error = ''
     let busy = false
 
     const dispatch = createEventDispatcher()
 
-    let profileName = get(newProfile)?.name ?? ''
-    let isDeveloperProfile = get(newProfile)?.isDeveloperProfile ?? false
+    let profileName = $newProfile?.name ?? ''
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? false
 
     $: isProfileNameValid = profileName && profileName.trim()
+    $: profileName, (error = '') // Error clears when profileName changes
+    $: nameChanged = $newProfile?.name !== profileName.trim()
+    $: hasDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
 
-    // This looks odd but sets a reactive dependency on profileName, so when it changes the error will clear
-    $: profileName, (error = '')
-
-    async function handleContinueClick() {
+    async function handleContinueClick(): Promise<void> {
         const trimmedProfileName = profileName.trim()
-        if (trimmedProfileName) {
-            error = ''
+        try {
+            validateProfileName(trimmedProfileName, $profiles)
+        } catch (err) {
+            return (error = err.message)
+        }
+        cleanUpIfPreviouslyInitialized()
+        await initialiseProfile(trimmedProfileName)
+    }
 
-            const validateError = validateFilenameChars(trimmedProfileName)
-            if (validateError) {
-                return (error = locale(`error.account.${validateError}`))
+    function cleanUpIfPreviouslyInitialized(): void {
+        const previousInitializedId = $newProfile?.id
+        if ((nameChanged || hasDeveloperProfileChanged) && previousInitializedId) {
+            destroyActor(previousInitializedId)
+        }
+    }
+
+    async function initialiseProfile(name: string): Promise<void> {
+        try {
+            busy = true
+            if (nameChanged || hasDeveloperProfileChanged) {
+                createProfile(name, isDeveloperProfile)
+                profileInProgress.set(name)
+
+                const userDataPath = await Electron.getUserDataPath()
+                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                initialiseMigrationListeners()
             }
 
-            if (getTrimmedLength(trimmedProfileName) > MAX_PROFILE_NAME_LENGTH) {
-                return (error = locale('error.profile.length', {
-                    values: {
-                        length: MAX_PROFILE_NAME_LENGTH,
-                    },
-                }))
+            if(isDeveloperProfile) {
+                openPopup({type: 'confirmDeveloperProfile', props: {
+                    handleContinueClick: () => dispatch('next')
+                }})
+            } else {
+                dispatch('next')
             }
 
-            if (get(profiles).some((profile) => profile.name === trimmedProfileName)) {
-                return (error = locale('error.profile.duplicate'))
-            }
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: locale(err.error ? err.error : 'error.global.generic'),
+            })
+        } finally {
+            busy = false
+        }
+    }
 
-            const previousInitializedId = $newProfile?.id
-            const nameChanged = $newProfile?.name !== trimmedProfileName
-            const isDeveloperProfileChanged = $newProfile?.isDeveloperProfile !== isDeveloperProfile
+    function validateProfileName(trimmedName: string, profiles: Profile[]): void {
+        const validateError = validateFilenameChars(trimmedName)
 
-            // If the name has changed from the previous initialization
-            // then make sure we cleanup the last profile and actor
-            if ((nameChanged || isDeveloperProfileChanged) && previousInitializedId) {
-                // The initialized profile name has changed
-                // so we need to destroy the previous actor
-                destroyActor(previousInitializedId)
-            }
+        if (validateError) {
+            throw new Error(locale(`error.account.${validateError}`))
+        }
 
-            try {
-                busy = true
+        if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {
+            throw new Error(locale('error.profile.length', {
+                values: {
+                    length: MAX_PROFILE_NAME_LENGTH,
+                },
+            }))
+        }
 
-                if (nameChanged || isDeveloperProfileChanged) {
-                    createProfile(trimmedProfileName, isDeveloperProfile)
-                    profileInProgress.set(trimmedProfileName)
-
-                    const userDataPath = await Electron.getUserDataPath()
-                    initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
-
-                    initialiseMigrationListeners()
-                }
-
-                if(isDeveloperProfile) {
-                    openPopup({type: 'confirmDeveloperProfile', props: {
-                        handleContinueClick: () => dispatch('next')
-                    }})
-                } else {
-                    dispatch('next')
-                }
-            } catch (err) {
-                showAppNotification({
-                    type: 'error',
-                    message: locale(err.error ? err.error : 'error.global.generic'),
-                })
-            } finally {
-                busy = false
-            }
+        if (profiles.some((p) => p.name === trimmedName)) {
+            throw new Error(locale('error.profile.duplicate'))
         }
     }
 
     async function handleBackClick() {
         cleanupSignup()
         cleanupInProgressProfiles()
-
         await disposeNewProfile()
-
         dispatch('previous')
     }
 </script>
@@ -133,7 +134,7 @@
                 disabled={busy}
                 submitHandler={handleContinueClick} />
 
-            <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={get(newProfile)?.isDeveloperProfile ?? false}> 
+            <CollapsibleBlock label={locale('views.profile.advancedOptions')} showBlock={$newProfile?.isDeveloperProfile ?? false}> 
                 <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
                     <div class="text-left">
                         <Text type="p">{locale('views.profile.developer.label')}</Text>
