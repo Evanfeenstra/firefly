@@ -7,8 +7,7 @@
     import { validatePinFormat } from 'shared/lib/utils'
     import { api, getStoragePath, initialise } from 'shared/lib/wallet'
     import { createEventDispatcher, onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
-    import { Locale } from 'shared/lib/typings/i18n'
+    import type { Locale } from 'shared/lib/typings/i18n'
 
     export let locale: Locale
 
@@ -63,11 +62,11 @@
     }
 
     function onSubmit() {
-        if (get(ongoingSnapshot) === true) {
+        if ($ongoingSnapshot === true) {
             return openSnapshotPopup()
         }
         if (!hasReachedMaxAttempts) {
-            const profile = get(activeProfile)
+            const profile = $activeProfile
 
             isBusy = true
 
