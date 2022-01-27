@@ -22,10 +22,10 @@
                 "nonFirst": "Per ora, iniziamo con il nome del tuo profilo."
             },
             "addMore": "È possibile aggiungere ulteriori profili successivamente.",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "Opzioni avanzate",
             "developer": {
                 "label": "Profilo Sviluppatore",
-                "info": "Connect to the devnet or a private network"
+                "info": "Connettiti al devnet o a una rete privata"
             }
         },
         "setup": {
@@ -639,7 +639,7 @@
             "title": "Conferma la transazione",
             "body": "Stai per inviare {amount} a",
             "sendingFromStakedAccount": "Stai inviando un trasferimento da un wallet che si trova attualmente in staking. Questo potrebbe annullare lo staking dei token. L'invio della transazione è possible, ma è necessario rimettere in stake i token rimanenti.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "Stai inviando un trasferimento da un portafoglio che non ha ancora raggiunto la ricompensa di staking minima. Questo potrebbe dismettere i tuoi token e potresti perdere le tue ricompense di staking su questo portafoglio."
         },
         "balanceFinder": {
             "title": "Rivaluta il saldo",
@@ -750,8 +750,8 @@
             "body2": "Miriamo a lanciare Assembly nel 2022. I token saranno disponibili per il trasferimento una volta avviata la rete."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
-            "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
+            "title": "Stai creando un profilo sviluppatore",
+            "body": "Sarai connesso al Chrysalis Devnet di default e puoi passare manualmente tra le reti. Continua solo se sai cosa stai facendo."
         }
     },
     "charts": {
@@ -905,7 +905,7 @@
         "from": "Da",
         "to": "A",
         "receiveFunds": "Ricevi fondi",
-        "address": "Address",
+        "address": "Indirizzo",
         "myAddress": "Il mio Indirizzo",
         "shareAddress": "Condividi un indirizzo",
         "yourAddress": "Il tuo indirizzo",
@@ -1257,7 +1257,7 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "Stai correntemente usando un profilo sviluppatore e sei connesso a {networkName}"
         }
     }
 }

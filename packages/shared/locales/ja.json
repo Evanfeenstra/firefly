@@ -22,10 +22,10 @@
                 "nonFirst": "まずは 、あなたのプロフィール名から始めましょう"
             },
             "addMore": "後でプロフィールを追加できます",
-            "advancedOptions": "Advanced options",
+            "advancedOptions": "アドバンスド オプション",
             "developer": {
                 "label": "開発者プロフィール",
-                "info": "Connect to the devnet or a private network"
+                "info": "devnet またはプライベートネットワークに接続します"
             }
         },
         "setup": {
@@ -263,7 +263,7 @@
         },
         "securingSpentAddresses": {
             "title": "使用済みアドレスを保護しています...",
-            "body1": "This process will take {minutes, plural, one {# minute} other {# minutes}}.",
+            "body1": "このプロセスには {minutes, plural, one {# 分} other {# 分}}かかります。",
             "body2": "この作業中、コンピューターはフル稼働します。作業完了まで、時間を要するため、お待ちいただく間、何か他のことをされて構いません。"
         },
         "transferFragmentedFunds": {
@@ -441,7 +441,7 @@
             }
         },
         "login": {
-            "pleaseWait": "Please wait {time, plural, one {# second} other {# seconds}}",
+            "pleaseWait": "{time, plural, one {# 秒 } other {# 秒 }} お待ちください ",
             "incorrectAttempts": "{attempts, plural, one {# incorrect attempt} other {# incorrect attempts}}"
         },
         "dashboard": {
@@ -488,7 +488,7 @@
         },
         "staking": {
             "title": "ステーキング",
-            "welcome": "Welcome to the staking dashboard!",
+            "welcome": "ステーキングダッシュボードへようこそ!",
             "status": {
                 "upcoming": "イベントは開始されていません",
                 "commencing": "事前ステーキングオープン",
@@ -638,8 +638,8 @@
         "transaction": {
             "title": "取引を承認する",
             "body": "{amount} を送金しようとしています",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccount": "現在ステークされているウォレットから送金を行っていますが、これはトークンのステークを解除する可能性があります。 送金は自由ですが、後で残りのトークンを再度 ステークする必要があるかもしれません。",
+            "sendingFromStakedAccountBelowMinReward": "ステーキング報酬の最小額に達していないウォレットから送金を行っています。 これにより、トークンがステーク解除され、このウォレットにステーキング報酬が失われる可能性があります。"
         },
         "balanceFinder": {
             "title": "残高を検索する",
@@ -721,12 +721,12 @@
         "stakingNotice": {
             "upcomingDate": "ステーキングはまだ開始されていません",
             "commencingDate": "ステーキングはまだ開始されていません",
-            "body": "By pre-staking your funds before staking starts, you will automatically begin receiving rewards when staking begins.",
+            "body": "ステーキング開始前に資金を事前にステーキングすることで、ステーキング開始時に自動的に報酬を受け取ることができます。",
             "ok": "はい。理解しました。"
         },
         "stakingManager": {
             "title": "ステーキング管理",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
+            "description": "ウォレットをステークすると、それらの資金を「ステークされた」として自分自身に送金します。 いつでもトークンを送金できますが、ステーキング報酬を受け取り続けることはありません。",
             "totalFundsStaked": "ステークの合計",
             "stakedSuccessfully": "あなたの資金は {account}にステークされました。",
             "unstakedSuccessfully": "あなたの資金は {account}にステーク解除されました。"
@@ -750,7 +750,7 @@
             "body2": "We aim to launch Assembly in 2022. Your tokens will become available to transfer once the network launches."
         },
         "confirmDeveloperProfile": {
-            "title": "You are creating a developer profile",
+            "title": "開発者プロフィール を作成しています",
             "body": "You will be connected to the Chrysalis Devnet by default, and can switch networks manually. Only continue if you know what you are doing."
         }
     },
@@ -905,7 +905,7 @@
         "from": "From",
         "to": "To",
         "receiveFunds": "資金を受け取る",
-        "address": "Address",
+        "address": "アドレス",
         "myAddress": "自分のアドレス",
         "shareAddress": "アドレスを共有",
         "yourAddress": "あなたのアドレス",
@@ -1022,13 +1022,13 @@
         "yearsAgo": "{time, plural, one {# 年 } other {# 年 }} 前"
     },
     "times": {
-        "second": "{time, plural, one {# second} other {# seconds}}",
-        "minute": "{time, plural, one {# minute} other {# minutes}}",
-        "hour": "{time, plural, one {# hour} other {# hours}}",
-        "day": "{time, plural, one {# day} other {# days}}",
-        "week": "{time, plural, one {# week} other {# weeks}}",
-        "month": "{time, plural, one {# month} other {# months}}",
-        "year": "{time, plural, one {# year} other {# years}}"
+        "second": "{time, plural, one {# 秒 } other {# 秒 }}",
+        "minute": "{time, plural, one {# 分} other {# 分}}",
+        "hour": "{time, plural, one {# 時間} other {# 時間}}",
+        "day": "{time, plural, one {# 日} other {# 日}}",
+        "week": "{time, plural, one {# 週間 } other {# 週間 }}",
+        "month": "{time, plural, one {# ヶ月} other {# ヶ月}}",
+        "year": "{time, plural, one {# 年 } other {# 年 }}"
     },
     "notifications": {
         "valueTx": "{{account}}に{{value}}を着金中",
@@ -1041,7 +1041,7 @@
         "updateError": "更新中にエラーが発生しました。もう一度やり直してください。",
         "restartInstall": "再起動してインストール",
         "calcMinutesRemaining": "残り時間を計算しています...",
-        "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
+        "minutesRemaining": "{minutes, plural, one {残り #  分} other {残り #  分}}",
         "copiedToClipboard": "クリップボードにコピーしました",
         "accountsSynchronized": "ウォレット同期が完了しました",
         "fundsAvailableSoon": "資金はまもなく利用可能になります",
@@ -1062,7 +1062,7 @@
     },
     "error": {
         "profile": {
-            "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "プロフィール名は{length, plural, one {#  文字} other {# 文字}}より長くすることはできません。",
             "duplicate": "この名前のプロフィールは既に存在します。",
             "delete": {
                 "nonEmptyAccounts": "プロフィールを削除する前に、すべての残高を転送する必要があります。"
@@ -1083,15 +1083,15 @@
             "similar": "このパスワードはよく使われるパスワードに似ています。",
             "word": "1つの単語によるパスワードは簡単に推測されてしまいます。",
             "incorrect": "パスワードが正しくありません。",
-            "length": "Your password can't be longer than {length, plural, one {# character} other {# characters}}."
+            "length": "パスワードは{length, plural, one {# 文字} other {# 文字 }}より長くすることはできません。"
         },
         "pincode": {
-            "length": "Your PIN must be {length, plural, one {# digit} other {# digits}} long.",
+            "length": "PINは{length, plural, one {#  桁} other {# 桁}} でなければなりません。",
             "match": "PIN が一致しません",
             "incorrect": "PINが正しくありません。"
         },
         "account": {
-            "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
+            "length": "ウォレット名は{length, plural, one {#  文字} other {# 文字 }}より長くすることはできません。",
             "empty": "新しいウォレットを作成する前に、最新のウォレットを使用する必要があります。",
             "notEmpty": "このウォレットを削除する前に残高を転送する必要があります。",
             "duplicate": "この名前のウォレットは既に存在して います。",
@@ -1104,7 +1104,7 @@
             "syncing": "ウォレットの同期中にエラーが発生しました。"
         },
         "send": {
-            "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
+            "addressLength": "アドレスは {length, plural, one {# 文字} other {# 文字}}でなければなりません。",
             "amountTooHigh": "この金額は、利用可能な残高を超えています。",
             "amountNoFloat": "単位が `i` の場合、小数点以下は使用できません。",
             "amountInvalidFormat": "金額には無効な数字があるようです。",
@@ -1132,7 +1132,7 @@
             "noSynced": "同期された利用可能なノードはありません。",
             "answer": "すべてのノードから回答を取得できませんでした。",
             "forbidden": "このノード接続は禁止されています。",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node."
+            "pluginNotAvailable": "{nodePlugin}プラグインは現在のノードでは使用できません。"
         },
         "network": {
             "mismatch": "このノードのネットワーク ID は \"{networkId}\" で、現在のネットワークと一致しません。",
@@ -1147,9 +1147,9 @@
             "invalid": "バックアップファイルが認識されませんでした。",
             "destination": "バックアップ先が無効です。",
             "mnemonic": "ニーモニックが無効です。",
-            "seedTooShort": "The seed should be 81 characters long, it {length, plural, one {is #} other {is #}}",
+            "seedTooShort": "シードの長さは81文字である必要があります, これ は{length, plural, one { です #} other { #です}}",
             "seedCharacters": "シードはA〜Zまたは数字の9のみを含める必要があります",
-            "phraseWordCount": "There should be 24 words in your recovery phrase, currently there {length, plural, one {is #} other {are #}}.",
+            "phraseWordCount": "復元フレーズには24単語が含まれているはずですが、現在は {length, plural, one {# です} other {# です}}.",
             "phraseUnrecognizedWord": "復元フレーズの単語「{word}」が認識されません",
             "phraseCaseWord": "単語「{word}」は小文字でなければなりません"
         },
@@ -1207,7 +1207,7 @@
             },
             "commencing": {
                 "title": "事前ステーキングは現在開いています",
-                "body": "Pre-stake your tokens, and once staking begins, you will automatically start receiving rewards every 10 seconds."
+                "body": "トークンを事前にステークし、ステーキングが開始されると、10秒ごとに自動的に報酬を受け取ります。"
             },
             "activeHolding": {
                 "title": "ステーキングが進行中です",
@@ -1231,15 +1231,15 @@
             "title": "新しい解除したステーク: {amount}",
             "titleNoFunds": "新しい解除したステーク",
             "preBody": "ステークされたウォレットにトークンを受け取りました。",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "body": "エアドロップ報酬を受け取るには、これらの新しい資金を手動でステークする必要があります。"
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
+            "title": "最小報酬値を下回る",
+            "titleMinBalance": "{amount} の最低残高が必要です",
             "bodyMinBalance": "このウォレットには最低エアドロップ報酬に達するのに十分なIOTAトークンがないため、ステークすることができません。",
-            "continue": "Please continue staking for another {duration}.",
+            "continue": "別の {duration} のステーキングを続けてください。",
             "bodyBelowMin": "このウォレットは {airdrop} ({airdropRewardMin} )の最低報酬に達していません。",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
+            "bodyWillReachMin": "別の {duration} をステークする必要があります。",
             "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
             "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
             "bodyMinBalanceAirdrop": "このウォレットには、 {airdrop}の最低エアドロップ報酬に達するのに十分なIOTAトークンがありません。"
@@ -1257,7 +1257,7 @@
     },
     "indicators": {
         "developerProfileIndicator": {
-            "warningText": "You are currently using a developer profile and are connected to {networkName}"
+            "warningText": "現在開発者プロフィール を使用しており、 {networkName} に接続されています"
         }
     }
 }

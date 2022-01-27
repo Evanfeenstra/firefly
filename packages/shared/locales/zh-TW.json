@@ -751,7 +751,7 @@
         },
         "confirmDeveloperProfile": {
             "title": "您正在建立開發者設定檔。",
-            "body": "您將連結至預設的 Chrysalis 開發網。您可以手動切換網路。在開始之前請先確定您具備相關的知識。"
+            "body": "您將連結至預設的 Chrysalis 開發網，並且可以手動切換網路。在開始前請先確定您具備相關的知識。"
         }
     },
     "charts": {
@@ -1041,7 +1041,7 @@
         "updateError": "更新時發生錯誤，請重試。",
         "restartInstall": "重新啟動以進行安裝",
         "calcMinutesRemaining": "正在計算剩餘時間...",
-        "minutesRemaining": "{minutes, plural, one {# 分鐘剩餘} other {# 分鐘剩餘}}",
+        "minutesRemaining": "{minutes, plural, one {剩下 # 分鐘} other {剩下 # 分鐘}}",
         "copiedToClipboard": "已複製到剪貼簿",
         "accountsSynchronized": "錢包同步完成",
         "fundsAvailableSoon": "您的資金很快就可以使用",
@@ -1091,7 +1091,7 @@
             "incorrect": "您輸入的 PIN 碼不正確"
         },
         "account": {
-            "length": "您的錢包名稱長度不能超過 {length, plural, one {# character} other {# 字元}}。",
+            "length": "您的錢包名稱長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
             "empty": "在您創建新的錢包之前，您必須使用最後存在的錢包。",
             "notEmpty": "您必須先轉移餘額，才能刪除此錢包。",
             "duplicate": "具有相同名稱的錢包已經存在。",
@@ -1104,7 +1104,7 @@
             "syncing": "同步您的錢包時發生錯誤。"
         },
         "send": {
-            "addressLength": "地址長度應符合 {length, plural, one {# character} other {# 字元}}。",
+            "addressLength": "地址長度應符合 {length, plural, one {# 字元} other {# 字元}}。",
             "amountTooHigh": "您輸入的數值大於您的可用餘額。",
             "amountNoFloat": "如果單位是“ i”，則不能使用小數位。",
             "amountInvalidFormat": "該金額是無效數字。",
@@ -1147,9 +1147,9 @@
             "invalid": "無法識別備份文件。",
             "destination": "備份目的地無效。",
             "mnemonic": "助記詞無效。",
-            "seedTooShort": "種子碼 (Seed) 長度必須為 81 個字元，目前{length, plural, one {is #} other {長度是 #}}。",
+            "seedTooShort": "種子碼 (Seed) 長度必須為 81 個字元，目前長度{length, plural, one {是 #} other {是 #}}。",
             "seedCharacters": "種子 (Seed) 應僅包含字符 A-Z 或 9",
-            "phraseWordCount": "您的助記詞應該要有24個字，目前為{length, plural, one {是 #} other {是 #}}。",
+            "phraseWordCount": "您的助記詞應該要有 24 個單字，目前有{length, plural, one { # } other { # }}個單字。",
             "phraseUnrecognizedWord": "您的助記詞中有無法辨識的單詞 “{word}”",
             "phraseCaseWord": "這個字\"{word}\" 應該要是小寫"
         },
