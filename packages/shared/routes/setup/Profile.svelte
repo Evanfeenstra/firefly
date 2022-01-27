@@ -7,11 +7,10 @@
     import { showAppNotification } from 'shared/lib/notifications'
     import {
         cleanupInProgressProfiles,
-        createProfile,
+        storeProfile,
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
-        profileInProgress,
         profiles,
     } from 'shared/lib/profile'
     import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
@@ -58,8 +57,7 @@
         try {
             busy = true
             if (nameChanged || hasDeveloperProfileChanged) {
-                createProfile(name, isDeveloperProfile)
-                profileInProgress.set(name)
+                storeProfile(name, isDeveloperProfile)
 
                 const userDataPath = await Electron.getUserDataPath()
                 initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
