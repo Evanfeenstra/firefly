@@ -3,7 +3,7 @@ import { _ } from 'svelte-i18n'
 import { getTrimmedLength, persistent, validateFilenameChars } from 'shared/lib/helpers'
 import { ledgerSimulator } from 'shared/lib/ledger'
 import { generateRandomId, migrateObjects } from 'shared/lib/utils'
-import { asyncRemoveStorage, destroyActor, getStoragePath, getWalletStoragePath } from 'shared/lib/wallet'
+import { asyncRemoveStorage, destroyActor, getProfileDataPath, getWalletDataPath } from 'shared/lib/wallet'
 import { Electron } from './electron'
 
 import { ProfileType } from './typings/profile'
@@ -258,9 +258,8 @@ export const cleanupInProgressProfiles = (): void => {
  */
 export const removeProfileFolder = async (profileName: string): Promise<void> => {
     try {
-        const userDataPath = await Electron.getUserDataPath()
-        const profileStoragePath = getStoragePath(userDataPath, profileName)
-        await Electron.removeProfileFolder(profileStoragePath)
+        const profileDataPath = await getProfileDataPath(profileName)
+        await Electron.removeProfileFolder(profileDataPath)
     } catch (err) {
         console.error(err)
     }
@@ -275,9 +274,8 @@ export const removeProfileFolder = async (profileName: string): Promise<void> =>
  */
 export const cleanupEmptyProfiles = async (): Promise<void> => {
     try {
-        const userDataPath = await Electron.getUserDataPath()
-        const profileStoragePath = getWalletStoragePath(userDataPath)
-        const storedProfiles = await Electron.listProfileFolders(profileStoragePath)
+        const profileDataPath = await getWalletDataPath()
+        const storedProfiles = await Electron.listProfileFolders(profileDataPath)
 
         profiles.update((_profiles) => _profiles.filter((p) => storedProfiles.includes(p.name)))
 

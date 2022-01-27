@@ -2,7 +2,6 @@
     import { createEventDispatcher } from 'svelte'
     import { Animation, Button, ButtonCheckbox, Input, OnboardingLayout, Text, CollapsibleBlock } from 'shared/components'
     import { cleanupSignup } from 'shared/lib/app'
-    import { Electron } from 'shared/lib/electron'
     import { initialiseMigrationListeners } from 'shared/lib/migration'
     import { showAppNotification } from 'shared/lib/notifications'
     import {
@@ -13,7 +12,7 @@
         newProfile,
         validateProfileName,
     } from 'shared/lib/profile'
-    import { destroyActor, getStoragePath, initialise } from 'shared/lib/wallet'
+    import { destroyActor, getProfileDataPath, initialise } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup';
     import type { Locale } from 'shared/lib/typings/i18n'
 
@@ -57,8 +56,8 @@
             if (nameChanged || hasDeveloperProfileChanged) {
                 storeProfile(name, isDeveloperProfile)
 
-                const userDataPath = await Electron.getUserDataPath()
-                initialise($newProfile.id, getStoragePath(userDataPath, $newProfile.name))
+                const path = await getProfileDataPath($newProfile.name)
+                initialise($newProfile.id, path)
                 initialiseMigrationListeners()
             }
 
