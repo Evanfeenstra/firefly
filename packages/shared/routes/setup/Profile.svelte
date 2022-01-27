@@ -11,13 +11,11 @@
         disposeNewProfile,
         hasNoProfiles,
         newProfile,
-        profiles,
+        validateProfileName,
     } from 'shared/lib/profile'
-    import { destroyActor, getStoragePath, initialise, MAX_PROFILE_NAME_LENGTH } from 'shared/lib/wallet'
+    import { destroyActor, getStoragePath, initialise } from 'shared/lib/wallet'
     import { openPopup } from 'shared/lib/popup';
-    import { getTrimmedLength, validateFilenameChars } from 'shared/lib/helpers';
     import type { Locale } from 'shared/lib/typings/i18n'
-    import type { Profile } from 'shared/lib/typings/profile';
 
     export let locale: Locale
     export let mobile: boolean
@@ -38,7 +36,7 @@
     async function handleContinueClick(): Promise<void> {
         const trimmedProfileName = profileName.trim()
         try {
-            validateProfileName(trimmedProfileName, $profiles)
+            validateProfileName(trimmedProfileName)
         } catch (err) {
             return (error = err.message)
         }
@@ -81,27 +79,7 @@
             busy = false
         }
     }
-
-    function validateProfileName(trimmedName: string, profiles: Profile[]): void {
-        const validateError = validateFilenameChars(trimmedName)
-
-        if (validateError) {
-            throw new Error(locale(`error.account.${validateError}`))
-        }
-
-        if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {
-            throw new Error(locale('error.profile.length', {
-                values: {
-                    length: MAX_PROFILE_NAME_LENGTH,
-                },
-            }))
-        }
-
-        if (profiles.some((p) => p.name === trimmedName)) {
-            throw new Error(locale('error.profile.duplicate'))
-        }
-    }
-
+    
     async function handleBackClick() {
         cleanupSignup()
         cleanupInProgressProfiles()
