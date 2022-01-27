@@ -44,46 +44,31 @@ try {
             activeProfileId = id
         },
         removeProfileFolder(profilePath) {
-            ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
-                // Check that the removing profile path matches the user data path
-                // so that we don't try and remove things outside our scope
-                if (profilePath.startsWith(userDataPath)) {
-                    try {
-                        // Sometime the DB can still be locked while it is flushing
-                        // so retry if we receive a busy exception
-                        fs.rmdirSync(profilePath, { recursive: true, maxRetries: 30, retryDelay: 500 })
-                    } catch (err) {
-                        console.error(err)
-                    }
-                }
-            })
+            try {
+                // Retry if DB locked while it is flushing
+                fs.rmdirSync(profilePath, { recursive: true, maxRetries: 30, retryDelay: 500 })
+            } catch (err) {
+                console.error(err)
+            }
         },
         renameProfileFolder(oldPath, newPath) {
-            ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
-                if (oldPath.startsWith(userDataPath)) {
-                    try {
-                        fs.renameSync(oldPath, newPath)
-                    } catch (err) {
-                        console.error(err)
-                    }
-                }
-            })
+            try {
+                // Retry if DB locked while it is flushing
+                fs.renameSync(oldPath, newPath)
+            } catch (err) {
+                console.error(err)
+            }
         },
         async listProfileFolders(profileStoragePath) {
-            const userDataPath = await ipcRenderer.invoke('get-path', 'userData')
-            // Check that the profile path matches the user data path
-            // so that we don't try and remove things outside our scope
-            if (profileStoragePath.startsWith(userDataPath)) {
-                try {
-                    // Get a list of all the profile folders in storage
-                    return fs.readdirSync(profileStoragePath)
-                } catch (err) {
-                    if (err.code === 'ENOENT') {
-                        // The __storage__ directory doesn't exist
-                        return []
-                    }
-                    console.error(err)
+            try {
+                // Get a list of all the profile folders in storage
+                return fs.readdirSync(profileStoragePath)
+            } catch (err) {
+                if (err.code === 'ENOENT') {
+                    // The __storage__ directory doesn't exist
+                    return []
                 }
+                console.error(err)
             }
         },
         PincodeManager,
