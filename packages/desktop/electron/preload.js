@@ -58,6 +58,17 @@ try {
                 }
             })
         },
+        renameProfileFolder(oldPath, newPath) {
+            ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+                if (oldPath.startsWith(userDataPath)) {
+                    try {
+                        fs.renameSync(oldPath, newPath)
+                    } catch (err) {
+                        console.error(err)
+                    }
+                }
+            })
+        },
         async listProfileFolders(profileStoragePath) {
             const userDataPath = await ipcRenderer.invoke('get-path', 'userData')
             // Check that the profile path matches the user data path
